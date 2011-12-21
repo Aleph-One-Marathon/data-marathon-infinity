@@ -743,6 +743,9 @@ end
 function drawNetPlayers()
   local tr = { x = pos.scorePanelOffset.x, y = pos.scorePanelOffset.y }
   local gametype = Game.type
+  if gametype == "netscript" then
+    gametype = Game.scoring_mode
+  end
   
   local lbl, value = net_gamelimit()
   if lbl ~= nil then
