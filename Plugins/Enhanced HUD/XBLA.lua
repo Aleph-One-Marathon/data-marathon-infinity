@@ -253,6 +253,20 @@ function Triggers.resize()
   Screen.term_rect.x = sx + (sw - w)/2
   Screen.term_rect.y = sy + 0.23*(sh - h)
   
+  shortened_player_names = {}
+
+  local max_name_len = pos.scorePanelRankOffset.x - pos.scorePanelNameOffset.x
+  for i = 1, # Game.players do
+     local p = Game.players[i - 1]
+     local name = p.name
+     if ngf:measure_text(name) >= max_name_len and # name > 3 then
+	name = name:sub(1, # name - 3) .. "..."
+	while ngf:measure_text(name) >= max_name_len and # name > 4 do
+	   name = name:sub(1, # name - 4) .. "..."
+	end
+     end
+     shortened_player_names[p.index] = name
+  end
 end
 
 function drawBL(image, x, y)
@@ -759,7 +773,7 @@ function drawNetPlayers()
       drawTR(img.scorePanelIcon, tr.x, tr.y)
     end
     drawNetText(ranking_text(gametype, v.player.ranking), { x = tr.x + pos.scorePanelScoreOffset.x, y = tr.y + pos.scorePanelScoreOffset.y })
-    drawNetText(v.player.name, { x = tr.x + pos.scorePanelNameOffset.x, y = tr.y + pos.scorePanelNameOffset.y })
+    drawNetText(shortened_player_names[v.player.index], { x = tr.x + pos.scorePanelNameOffset.x, y = tr.y + pos.scorePanelNameOffset.y })
     drawNetText(v.rank, { x = tr.x + pos.scorePanelRankOffset.x, y = tr.y + pos.scorePanelRankOffset.y })
     
     tr.y = tr.y + img.scorePanel.height + pos.scorePanelSpacer
