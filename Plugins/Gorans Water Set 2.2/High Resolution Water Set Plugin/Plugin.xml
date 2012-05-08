@@ -1,0 +1,4 @@
+<plugin name="Gorans Water Set 2.2" description="512x512 Textures">
+<shapes_patch file="Shapes Patch.ShPa" />
+<mml file="Plugin.mml"/>
+</plugin>
