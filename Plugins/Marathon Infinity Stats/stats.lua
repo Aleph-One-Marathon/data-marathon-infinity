@@ -37,6 +37,13 @@ function Triggers.cleanup()
    stats["end tick"] = Game.ticks
    if Level.completed then
       stats["level completed"] = 1
+      
+      -- count monsters left alive on map
+      for m in Monsters() do
+         if not m.player and (m.vitality > 0 or not m.visible) then
+          increment(monster.type.mnemonic .. "s spared")
+        end
+      end
    end
 
    if #Players > 1 then
