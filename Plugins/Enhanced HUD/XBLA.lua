@@ -1,16 +1,16 @@
 -- Copyright (C) 2011 and beyond by Jeremiah Morris
 -- and the "Aleph One" developers.
--- 
+--
 -- This program is free software; you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
 -- the Free Software Foundation; either version 3 of the License, or
 -- (at your option) any later version.
--- 
+--
 -- This program is distributed in the hope that it will be useful,
 -- but WITHOUT ANY WARRANTY; without even the implied warranty of
 -- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 -- GNU General Public License for more details.
--- 
+--
 -- This license is contained in the file "COPYING",
 -- which is included with this source code; it is available online at
 -- http://www.gnu.org/licenses/gpl.html
@@ -37,9 +37,18 @@ function Triggers.init()
   img.motionSensorDisabledHUD = Images.new{path = "720p/health_noradar.png"}
   img.motionSensorHUD = Images.new{path = "720p/health_radar.png"}
   img.weaponAreaHUD = Images.new{path = "720p/weapons.png"}
-  img.barLeftEnd = Images.new{path = "720p/left.png"}
-  img.bar = Images.new{path = "720p/mid.png"}
-  img.barRightEnd = Images.new{path = "720p/right.png"}
+  img.oxygenBarLeftEnd = Images.new{path = "720p/left_oxygen.png"}
+  img.oxygenBar = Images.new{path = "720p/mid_oxygen.png"}
+  img.oxygenBarRightEnd = Images.new{path = "720p/right_oxygen.png"}
+  img.shield1xBarLeftEnd = Images.new{path = "720p/left_shield1x.png"}
+  img.shield1xBar = Images.new{path = "720p/mid_shield1x.png"}
+  img.shield1xBarRightEnd = Images.new{path = "720p/right_shield1x.png"}
+  img.shield2xBarLeftEnd = Images.new{path = "720p/left_shield2x.png"}
+  img.shield2xBar = Images.new{path = "720p/mid_shield2x.png"}
+  img.shield2xBarRightEnd = Images.new{path = "720p/right_shield2x.png"}
+  img.shield3xBarLeftEnd = Images.new{path = "720p/left_shield3x.png"}
+  img.shield3xBar = Images.new{path = "720p/mid_shield3x.png"}
+  img.shield3xBarRightEnd = Images.new{path = "720p/right_shield3x.png"}
   img.radarBackground = Images.new{path = "720p/background.png"}
   img.friendly = Images.new{path = "720p/friendly.png"}
   img.enemy = Images.new{path = "720p/enemy.png"}
@@ -352,19 +361,19 @@ function Triggers.draw()
   end
   
   -- oxygen bar
-  drawBar(pos.oxygenOffset, pos.oxygenLength, Player.oxygen, 10800, { 0, 0.690, 0.788, 1 })
+  drawBar(pos.oxygenOffset, pos.oxygenLength, Player.oxygen, 10800, "oxygen")
   
   -- health bar
   do
     local health = Player.energy
     if (health > 0) and (health < 300) then
-      drawBar(pos.shieldOffset, pos.shieldLength, health, 150, { 1, 0, 0, 1 })
+      drawBar(pos.shieldOffset, pos.shieldLength, health, 150, "shield1x")
     end
     if (health > 150) and (health < 450) then
-      drawBar(pos.shieldOffset, pos.shieldLength, health - 150, 150, { 1, 1, 0, 1 })
+      drawBar(pos.shieldOffset, pos.shieldLength, health - 150, 150, "shield2x")
     end
     if health > 300 then
-      drawBar(pos.shieldOffset, pos.shieldLength, health - 300, 150, { 1, 0, 1, 1 })
+      drawBar(pos.shieldOffset, pos.shieldLength, health - 300, 150, "shield3x")
     end
   end
   
@@ -416,7 +425,7 @@ function Triggers.draw()
         drawAmmo({ x = ammoL, y = ammoB }, img.arAmmoEmpty, img.arAmmoFull, weapon.primary.rounds - extra, 13)
         extra = extra - 13
         ammoB = ammoB + bullets.height
-      end      
+      end
 
       drawReserve("x" .. Player.items[weapon.primary.ammo_type].count, pos.assaultRifleClipReadoutOffset)
       
@@ -468,7 +477,7 @@ function Triggers.draw()
         drawAmmo({ x = ammoL, y = ammoB }, img.smgAmmoEmpty, img.smgAmmoFull, weapon.primary.rounds - extra, 8)
         extra = extra - 8
         ammoB = ammoB + bullets.height
-      end      
+      end
 
       drawReserve(Player.items[weapon.primary.ammo_type].count .. "x", pos.smgClipReadoutOffset)
     end
@@ -505,13 +514,10 @@ function drawAmmoR(offset, empty, full, cur, max)
   drawBRL(full, offset.x - full.crop_rect.x, offset.y)
 end
  
-function drawBar(offset, width, cur, max, clr)
-  local li = img.barLeftEnd
-  li.tint_color = clr
-  local mi = img.bar
-  mi.tint_color = clr
-  local ri = img.barRightEnd
-  ri.tint_color = clr
+function drawBar(offset, width, cur, max, which)
+  local li = img[which .. "BarLeftEnd"]
+  local mi = img[which .. "Bar"]
+  local ri = img[which .. "BarRightEnd"]
   
   local total_width = math.floor(width * math.max(0, math.min(cur, max)) / max)
   local cap_width = li.width + ri.width
@@ -597,7 +603,7 @@ function drawCompass(image, offset)
 end
 
 function hasbit(x, p)
-  return x % (p + p) >= p       
+  return x % (p + p) >= p
 end
 
 function bitand(x, y)
