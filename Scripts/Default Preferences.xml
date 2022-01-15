@@ -10,12 +10,5 @@
   <!-- use Marathon Infinity film profile -->
   <environment film_profile="2">
 	<disable_plugin path="$default$/Plugins/Enhanced HUD"/>
-    <disable_plugin path="$default$/Plugins/2048 Landscape Plugin"/>
-    <disable_plugin path="$default$/Plugins/Gorans Jjarro Set/High Res Jjarro Textures Plugin - DDS"/>
-    <disable_plugin path="$default$/Plugins/Gorans Lava Set/High Resolution Lava Set Plugin"/>
-    <disable_plugin path="$default$/Plugins/Gorans Pfhor Set/High Res Pfhor Set Plugin"/>
-    <disable_plugin path="$default$/Plugins/Gorans Sewage Set/High Res Sewage Textures Plugin"/>
-    <disable_plugin path="$default$/Plugins/Gorans Water Set/High Resolution Water Set Plugin"/>
-    <disable_plugin path="$default$/Plugins/HD Weapons"/>
   </environment>
 </mara_prefs>
