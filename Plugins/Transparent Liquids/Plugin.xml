@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="Transparent Liquids" description="Modifies opacity of default liquid textures">
+  <mml file="Transparent_Liquids.mml"/>
+  <scenario name="Marathon 2"/>
+  <scenario name="Marathon Infinity"/>
+</plugin>
+

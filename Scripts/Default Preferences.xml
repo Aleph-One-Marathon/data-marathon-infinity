@@ -10,5 +10,6 @@
   <!-- use Marathon Infinity film profile -->
   <environment film_profile="2">
 	<disable_plugin path="$default$/Plugins/Enhanced HUD"/>
+	<disable_plugin path="$default$/Plugins/Transparent Liquids"/>
   </environment>
 </mara_prefs>
