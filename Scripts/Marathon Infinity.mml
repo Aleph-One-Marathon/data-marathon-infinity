@@ -1,5 +1,5 @@
 <marathon>
-<scenario name="Marathon Infinity" id="Marathon Infinity">
+<scenario name="Marathon Infinity" id="Marathon Infinity" allow_classic_gameplay="true">
 <can_join>Marathon 2</can_join>
 </scenario>
 </marathon>
