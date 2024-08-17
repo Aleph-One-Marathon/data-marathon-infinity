@@ -5,7 +5,7 @@
 <string index="2">Sounds.sndA</string>
 <string index="4">Marathon Infinity Preferences</string>
 <string index="5">Map.sceA</string>
-<string index="9">Standard.phyA</string>
+<string index="9">Physics Models/Standard.phyA</string>
 <string index="10">Music.ogg</string>
 <string index="11">Images.imgA</string>
 </stringset>
